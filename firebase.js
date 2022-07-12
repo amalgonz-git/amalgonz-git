@@ -23,21 +23,42 @@ function uuidv4() {
 function aviso() {
   setTimeout(function(){
     alert("La rifa esta limitada a un registro, mas intentos de registro seran motivo de descalificacion ");
-    window.location.href = "https://zexceed7.github.io/";
+    window.location.href = "https://amalgonz-git.github.io/";
 }, 1500);
 }
 
-function post_daddy(){
-    var blog = document.getElementById("daddy-ticket").value
-    firebase.database().ref("OV7/"+uuidv4()).set(blog)
-    document.getElementById("daddy-ticket").value="" 
+function post_sonora(){
+    var blog = document.getElementById("sonora-ticket").value
+    firebase.database().ref("mex6/sonora/"+uuidv4()).set(blog)
+    document.getElementById("sonora-ticket").value="" 
     aviso()
 };
 
-function post_maluma(){
-  var blog = document.getElementById("maluma-ticket").value
-  firebase.database().ref("DLD/"+uuidv4()).set(blog)
-  document.getElementById("maluma-ticket").value="" 
+function post_division(){
+  var blog = document.getElementById("division-ticket").value
+  firebase.database().ref("mex6/Division/"+uuidv4()).set(blog)
+  document.getElementById("division-ticket").value="" 
+  aviso()
+};
+
+function post_carla(){
+  var blog = document.getElementById("carla-ticket").value
+  firebase.database().ref("mex6/carla/"+uuidv4()).set(blog)
+  document.getElementById("carla-ticket").value="" 
+  aviso()
+};
+
+function post_bukis(){
+  var blog = document.getElementById("bukis-ticket").value
+  firebase.database().ref("mex6/bukis/"+uuidv4()).set(blog)
+  document.getElementById("bukis-ticket").value="" 
+  aviso()
+};
+
+function post_2000(){
+  var blog = document.getElementById("2000-ticket").value
+  firebase.database().ref("2000/"+uuidv4()).set(blog)
+  document.getElementById("2000-ticket").value="" 
   aviso()
 };
 
