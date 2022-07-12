@@ -57,14 +57,14 @@ function post_bukis(){
 
 function post_2000(){
   var blog = document.getElementById("2000-ticket").value
-  firebase.database().ref("2000/"+uuidv4()).set(blog)
+  firebase.database().ref("mex6/2000/"+uuidv4()).set(blog)
   document.getElementById("2000-ticket").value="" 
   aviso()
 };
 
-function post_fobia(){
-  var blog = document.getElementById("fobia-ticket").value
-  firebase.database().ref("90's Pop Tour/"+uuidv4()).set(blog)
-  document.getElementById("fobia-ticket").value="" 
+function post_bad(){
+  var blog = document.getElementById("bad-ticket").value
+  firebase.database().ref("mex6/bad/"+uuidv4()).set(blog)
+  document.getElementById("bad-ticket").value="" 
   aviso()
 };
