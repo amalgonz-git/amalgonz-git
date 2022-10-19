@@ -1,338 +1,50 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Rifa de conciertos</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="index-style.css">
+
+    <title>Blog</title>
+</head>
+<body>
+        <!-- NO TOCAR NADA DE AQUI OKAAAAAA-->
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-database.js"></script>
+        <script src="app.js"></script>
+        <!-- HASTA AQUI -->
+<header>
+<div class="topnav" id="topnav">
+    <div class="bar-box" id="top-section">
+        <img src="https://media.tenor.com/images/53ed3f69d8af8e1fb7b0025a97452e38/tenor.gif" alt="" id="doge">
+        <h1 id="page-name">Ticket facilito</h1>
+    </div>
+    <a class="main-return" onclick="returnToMain()">Pendientes</a>
+    <a class="main-return" onclick="newEntry()">Crear</a>
+    <a class="main-return" onclick="showToDelete()">Resolver</a>
 
-        <script src="firebase.js"></script>
+</div>
+</header>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+<div class="content" id="content">
+    <div id="post-container"></div>
+</div>
 
-				<!-- Header -->
-					<header id="header">
-						<div class="logo">
-							<span class="icon fa-gem"></span>
-						</div>
-						<div class="content">
-							<div class="inner">
-								<h1>Rifa de conciertos</h1>
-								<p>Selecciona el concierto al cual quieres acudir para participar en la rifa.</p>
-							</div>
-						</div>
-						<nav>
-							<ul>
-								<li><a href="#Sonora">Sonora Dinamita</a></li>
-								<li><a href="#Division">Division Minuscula</a></li>
-								<li><a href="#Carla">Carla Morrison</a></li>
-								<li><a href="#Bukis">Los Bukis</a></li>
-								<li><a href="#2000">2000's Pop Tour</a></li>
-								<li><a href="#Bad">Bad Bunny</a></li>		
-							</ul>
-						</nav>
-					</header>
+<div class="card" id="card">
+    <h1 id="title">Crear nueva solicitud</h1>
+    <input type="text" class="card-title" id="card-title" placeholder="Titulo">
+    <input type="text" class="card-author" id="card-author" placeholder="Login">
+    <textarea placeholder="Añade una breve descripcion" class="card-intext" id="card-intext" row="8"></textarea>
+    <button class="send-button" onclick="post_blog()">Submit</button>
+</div>
 
-				<!-- Main -->
-					<div id="main">
-
-						<!-- Intro -->
-							<article id="Sonora">
-								<h2 class="major">Sonora Dinamita</h2>
-								<span class="image main"><img src="images/sonora.png" alt="" /></span>
-								<p>Si deseas participar para la rifa de un boleto para Sonora Dinamita, registrate aqui.</p>
-								<input type="text" class="card-title" id="sonora-ticket" placeholder="Escanea tu badge">
-								<button class="send-button" onclick="post_sonora()">Submit</button>
-							</article>
-
-						<!-- Work -->
-							<article id="Division">
-								<h2 class="major">Division Minuscula</h2>
-								<span class="image main"><img src="images/division.png" alt="" /></span>
-								<p>Si deseas participar para la rifa de un boleto para Division Minuscula, registrate aqui.</p>
-								<input type="text" class="card-title" id="division-ticket" placeholder="Escanea tu badge">
-								<button class="send-button" onclick="post_division()">Submit</button>
-							</article>
-
-						<!-- Work -->
-						<article id="Carla">
-							<h2 class="major">Carla Morrison</h2>
-							<span class="image main"><img src="images/carla.png" alt="" /></span>
-							<p>Si deseas participar para la rifa de un boleto para Carla Morrison, registrate aqui.</p>
-							<input type="text" class="card-title" id="carla-ticket" placeholder="Escanea tu badge">
-							<button class="send-button" onclick="post_carla()">Submit</button>
-						</article>
-
-						<!-- Work -->
-						<article id="Bukis">
-							<h2 class="major">Los Bukis</h2>
-							<span class="image main"><img src="images/bukis.png" alt="" /></span>
-							<p>Si deseas participar para la rifa de un boleto para Los Bukis, registrate aqui.</p>
-							<input type="text" class="card-title" id="bukis-ticket" placeholder="Escanea tu badge">
-							<button class="send-button" onclick="post_bukis()">Submit</button>
-						</article>
-
-						<!-- Work -->
-						<article id="2000">
-							<h2 class="major">2000's Pop Tour</h2>
-							<span class="image main"><img src="images/2000.png" alt="" /></span>
-							<p>Si deseas participar para la rifa de un boleto para 2000's Pop Tour, registrate aqui.</p>
-							<input type="text" class="card-title" id="2000-ticket" placeholder="Escanea tu badge">
-							<button class="send-button" onclick="post_2000()">Submit</button>
-						</article>
-
-						<!-- Work -->
-						<article id="Bad">
-							<h2 class="major">Bad Bunny</h2>
-							<span class="image main"><img src="images/bad.png" alt="" /></span>
-							<p>Si deseas participar para la rifa de un boleto para Bad Bunny, registrate aqui.</p>
-							<input type="text" class="card-title" id="bad-ticket" placeholder="Escanea tu badge">
-							<button class="send-button" onclick="post_bad()">Submit</button>
-						</article>
-						
-						
-
-
-						<!-- Elements -->
-							<article id="elements">
-								<h2 class="major">Elements</h2>
-
-								<section>
-									<h3 class="major">Text</h3>
-									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
-									<hr />
-									<h2>Heading Level 2</h2>
-									<h3>Heading Level 3</h3>
-									<h4>Heading Level 4</h4>
-									<h5>Heading Level 5</h5>
-									<h6>Heading Level 6</h6>
-									<hr />
-									<h4>Blockquote</h4>
-									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
-									<h4>Preformatted</h4>
-									<pre><code>i = 0;
-
-while (!deck.isInOrder()) {
-    print 'Iteration ' + i;
-    deck.shuffle();
-    i++;
-}
-
-print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
-								</section>
-
-								<section>
-									<h3 class="major">Lists</h3>
-
-									<h4>Unordered</h4>
-									<ul>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
-
-									<h4>Alternate</h4>
-									<ul class="alt">
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
-
-									<h4>Ordered</h4>
-									<ol>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis viverra.</li>
-										<li>Felis enim feugiat.</li>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis lorem.</li>
-										<li>Felis enim et feugiat.</li>
-									</ol>
-									<h4>Icons</h4>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-									</ul>
-
-									<h4>Actions</h4>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions stacked">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-								</section>
-
-								<section>
-									<h3 class="major">Table</h3>
-									<h4>Default</h4>
-									<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-
-									<h4>Alternate</h4>
-									<div class="table-wrapper">
-										<table class="alt">
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-								</section>
-
-								<section>
-									<h3 class="major">Buttons</h3>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Primary</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button">Default</a></li>
-										<li><a href="#" class="button small">Small</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
-										<li><a href="#" class="button icon solid fa-download">Icon</a></li>
-									</ul>
-									<ul class="actions">
-										<li><span class="button primary disabled">Disabled</span></li>
-										<li><span class="button disabled">Disabled</span></li>
-									</ul>
-								</section>
-
-								
-							</article>
-
-					</div>
-
-				<!-- Footer -->
-					<footer id="footer">
-						<p class="copyright"> Design: <a href="https://phonetool.amazon.com/users/amalgonz">amalgonz</a>.</p>
-					</footer>
-
-			</div>
-
-		<!-- BG -->
-			<div id="bg"></div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-			
-			
-			<script type="text/javascript">
-				$("document").ready( function() {
-
-					
-					function registro(){
-					var badge = prompt('Registra tu badge');
-					if (badge === null || badge === "") {
-						registro()
-					}
-					if (badge === 1) {
-						alert("test")
-					}
-				}
-					registro()
-
-	
-				}); 
-			</script>
-				
-
-
-				
-	</body>
+<div class="card" id="cardSearch">
+    <h1 id="lookfor">Search: </h1>
+    <input type="text" class="card-title" id="search-card-title" placeholder="Look For Title">
+    <button class="send-button" onclick="search()">Search</button>
+</div>
+</body>
 </html>
