@@ -1,17 +1,18 @@
-
+// Your web app's Firebase configuration
 var firebaseConfig = {
-	apiKey: "AIzaSyAUURAIvtgGFPF1fzGhGJc23ldDSD-I8vg",  
-	authDomain: "rifa-amzn.firebaseapp.com",
-	databaseURL: "https://rifa-amzn-default-rtdb.firebaseio.com",
-	projectId: "rifa-amzn",
-	storageBucket: "rifa-amzn.appspot.com",
-	messagingSenderId: "36339791681",
-	appId: "1:36339791681:web:5a3af7337054fe329793c0"
-  };
+  apiKey: "AIzaSyBogKY_ExmhgrtBrdhDO7ovycAasA0NzfE",
+  authDomain: "salon-clases.firebaseapp.com",
+  databaseURL: "https://salon-clases.firebaseio.com",
+  projectId: "salon-clases",
+  storageBucket: "salon-clases.appspot.com",
+  messagingSenderId: "917830244234",
+  appId: "1:917830244234:web:d2290a5cbc57bb079eda73"
+};
 // Initialize Firebase
 var firebase;
 firebase.initializeApp(firebaseConfig);
 
+//generate hash id for unique identifier on firebase
 function uuidv4() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
   var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -19,52 +20,135 @@ function uuidv4() {
   });
   }
 
+//displays new  entry on blog
 
-function aviso() {
-  setTimeout(function(){
-    alert("La rifa esta limitada a un registro, mas intentos de registro seran motivo de descalificacion ");
-    window.location.href = "https://amalgonz-git.github.io/";
-}, 1500);
+function newEntry(){
+  document.getElementById("card").style.display = "grid";
+  document.getElementById("topnav").style.display = "block";
+  document.getElementById("content").style.display = "none";
+};
+
+//returns to main, shows entries
+function returnToMain(){
+  get_data();
+  document.getElementById("topnav").style.display = "block";
+  document.getElementById("card").style.display = "none";
+  document.getElementById("content").style.display = "grid";
+};
+//shows to-delete data
+function showToDelete(){
+  displayToDelete();
+  document.getElementById("topnav").style.display = "block";
+  document.getElementById("card").style.display = "none";
+  document.getElementById("content").style.display = "grid";
+}
+//post and get functions for firebase
+function post_blog(){
+  get_data()
+  var blog ={
+      title: document.getElementById("card-title").value,
+      author: document.getElementById("card-author").value,
+      text: document.getElementById("card-intext").value
+  }
+  firebase.database().ref("mex6/"+uuidv4()).set(blog)
+  document.getElementById("card-author").value=""
+  document.getElementById("card-title").value=""
+  document.getElementById("card-intext").value=""
+
+  
+};
+
+function get_data() {
+  firebase.database().ref("/").once("value", function (database) {
+      database.forEach(function (content) {
+          var posts = content.val()
+          var results = document.getElementById('content');
+          if (results) {
+              results.innerHTML = "";
+              for (var id in posts) {
+                  tmp = id.toString()
+                  console.log(posts)
+                  //Loop through the object to get each objects data
+                  results.innerHTML +=
+                  `<div class="post-container" id="post-container">
+                  <p id="post-author">${posts[id].author.toUpperCase().bold()}<\p>
+                  <p id="post-text">${posts[id].text}<\p>
+                  <p id="post-title">${posts[id].title.toUpperCase().bold()}<\p>
+                  <\div>`;
+              }
+          }
+      })
+  })
+}
+function displayToDelete(){
+  firebase.database().ref("/").once("value", function (database) {
+      database.forEach(function (content) {
+          var posts = content.val()
+          var results = document.getElementById('content');
+          if (results) {
+              results.innerHTML = "";
+              for (var id in posts) {
+                  tmp = id.toString()
+                  console.log(posts)
+                  //Loop through the object to get each objects data
+                  results.innerHTML +=
+                  `<div class="post-container" id="post-container">
+                  <button class="less-product" onclick="delete_unit('${tmp}')">-</button>
+                  <p id="post-author">${posts[id].author.toUpperCase().bold()}<\p>
+                  <p id="post-text">${posts[id].text}<\p>
+                  <p id="post-title">${posts[id].title.toUpperCase().bold()}<\p>
+                  <\div>`;
+              }
+          }
+      })
+  })
 }
 
-function post_sonora(){
-    var blog = document.getElementById("sonora-ticket").value
-    firebase.database().ref("mex6/sonora/"+uuidv4()).set(blog)
-    document.getElementById("sonora-ticket").value="" 
-    aviso()
-};
+//Search implementado
 
-function post_division(){
-  var blog = document.getElementById("division-ticket").value
-  firebase.database().ref("mex6/Division/"+uuidv4()).set(blog)
-  document.getElementById("division-ticket").value="" 
-  aviso()
-};
+function showSearch(){
+  document.getElementById("cardSearch").style.display = "none";
+}
 
-function post_carla(){
-  var blog = document.getElementById("carla-ticket").value
-  firebase.database().ref("mex6/carla/"+uuidv4()).set(blog)
-  document.getElementById("carla-ticket").value="" 
-  aviso()
-};
+function search(value){
+  firebase.database().ref("/").once("value", function (database) {
+      database.forEach(function (content) {
+          var posts = content.val()
+          var results = document.getElementById('content');
+          if (results) {
+              results.innerHTML = "";
+              for (value in posts) {
+                  tmp = value.toString()
+                  console.log(posts)
+                  //Loop through the object to get each objects data
+                  results.innerHTML +=
+                      `<div class="post-container" id="post-container">
+                  <p id="post-author">${posts[value].author.toUpperCase().bold()}<\p>
+                  <p id="post-text">${posts[value].text}<\p>
+                  <p id="post-title">${posts[value].title.toUpperCase().bold()}<\p>
+                  <\div>`;
+              }
+          }
+      })
+  })
+}
 
-function post_bukis(){
-  var blog = document.getElementById("bukis-ticket").value
-  firebase.database().ref("mex6/bukis/"+uuidv4()).set(blog)
-  document.getElementById("bukis-ticket").value="" 
-  aviso()
-};
+// Delete implementado
 
-function post_2000(){
-  var blog = document.getElementById("2000-ticket").value
-  firebase.database().ref("mex6/2000/"+uuidv4()).set(blog)
-  document.getElementById("2000-ticket").value="" 
-  aviso()
-};
+function delete_unit(id) {
+  var adaRef = firebase.database().ref('mex6/'+id);
 
-function post_bad(){
-  var blog = document.getElementById("bad-ticket").value
-  firebase.database().ref("mex6/bad/"+uuidv4()).set(blog)
-  document.getElementById("bad-ticket").value="" 
-  aviso()
-};
+  adaRef.remove()
+      .then(function () {
+          console.log("Remove succeeded.")
+          
+      })
+      .catch(function (error) {
+          console.log("Remove failed: " + error.message)
+      });
+  
+  }
+
+
+
+get_data();
